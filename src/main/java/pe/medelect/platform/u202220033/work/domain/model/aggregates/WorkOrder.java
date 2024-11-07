@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NonNull;
 import pe.medelect.platform.u202220033.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
+import pe.medelect.platform.u202220033.work.domain.model.commands.CreateWorkOrderCommand;
 import pe.medelect.platform.u202220033.work.domain.model.valueobjects.HealthInstitutionId;
 import pe.medelect.platform.u202220033.work.domain.model.valueobjects.MedicalEquipmentId;
 import pe.medelect.platform.u202220033.work.domain.model.valueobjects.StaffId;
@@ -63,5 +64,16 @@ public class WorkOrder extends AuditableAbstractAggregateRoot<WorkOrder> {
         this.priority = priority;
         this.amount = amount;
         this.plannedAt = plannedAt;
+    }
+
+    public WorkOrder(CreateWorkOrderCommand command) {
+        this.workType = WorkType.valueOf(command.workType().toUpperCase());
+        this.medicalEquipmentId = new MedicalEquipmentId(command.medicalEquipmentId());
+        this.staffId = new StaffId(command.staffId());
+        this.healthInstitutionId = new HealthInstitutionId(command.healthInstitutionId());
+        this.description = command.description();
+        this.priority = command.priority();
+        this.amount = command.amount();
+        this.plannedAt = command.plannedAt();
     }
 }
