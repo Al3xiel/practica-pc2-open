@@ -76,4 +76,16 @@ public class WorkOrder extends AuditableAbstractAggregateRoot<WorkOrder> {
         this.amount = command.amount();
         this.plannedAt = command.plannedAt();
     }
+
+    public String getMedicalEquipmentIdString() {
+        return medicalEquipmentId.medicalEquipmentId();
+    }
+
+    public Long getStaffIdLong() {
+        return staffId.staffId();
+    }
+
+    public Long getHealthInstitutionIdLong() {
+        return healthInstitutionId.healthInstitutionId();
+    }
 }
