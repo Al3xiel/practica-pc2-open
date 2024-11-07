@@ -2,6 +2,8 @@ package pe.medelect.platform.u202220033.work.domain.model.aggregates;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
@@ -17,19 +19,30 @@ import pe.medelect.platform.u202220033.work.domain.model.valueobjects.WorkType;
 import javax.xml.crypto.Data;
 import java.util.Date;
 
+/**
+ * WorkOrder aggregate root entity
+ *
+ * @summary This entity represents the work order aggregate root entity.
+ * It contains the work type, medical equipment id, staff id, health institution id, description, priority, amount, and planned at date.
+ *
+ * @see WorkType
+ * @see MedicalEquipmentId
+ * @see StaffId
+ * @see HealthInstitutionId
+ *
+ * @since 1.0.0
+ */
 @Getter
 @Entity
 public class WorkOrder extends AuditableAbstractAggregateRoot<WorkOrder> {
     @NonNull
+    @Enumerated(EnumType.STRING)
     private WorkType workType;
     @Embedded
-    @NonNull
     private MedicalEquipmentId medicalEquipmentId;
     @Embedded
-    @NonNull
     private StaffId staffId;
     @Embedded
-    @NonNull
     private HealthInstitutionId healthInstitutionId;
     @Size(max = 200)
     @NonNull
